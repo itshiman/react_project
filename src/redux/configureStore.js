@@ -1,6 +1,6 @@
 import { createStore, combineReducers } from 'redux';
 import { Dishes } from './dishes';
-import { Comments } from './commets';
+import { Comments } from './comments';
 import { Promotions } from './promotions';
 import { Leaders } from './leaders';
 
