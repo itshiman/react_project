@@ -16,6 +16,7 @@ import {
   Row,
 } from 'reactstrap';
 import { LocalForm, Control, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 import { Link } from 'react-router-dom';
 
 const maxLength = (len) => (val) => !val || val.length <= len;
@@ -184,7 +185,23 @@ function RenderComments({ comments, addComment, dishId }) {
 }
 
 const DishDetail = (props) => {
-  if (props.dish != null)
+  if (props.isLoading) {
+    return (
+      <div className='container'>
+        <div className='row'>
+          <Loading />
+        </div>
+      </div>
+    );
+  } else if (props.errMess) {
+    return (
+      <div className='container'>
+        <div className='row'>
+          <h4>{props.errMess}</h4>
+        </div>
+      </div>
+    );
+  } else if (props.dish != null)
     return (
       <div className='container'>
         <div className='row'>
