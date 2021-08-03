@@ -18,6 +18,7 @@ import {
 import { LocalForm, Control, Errors } from 'react-redux-form';
 import { Loading } from './LoadingComponent';
 import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
 
 const maxLength = (len) => (val) => !val || val.length <= len;
 const minLength = (len) => (val) => val && val.length >= len;
@@ -58,15 +59,13 @@ class CommentForm extends Component {
         </Button>
         <Modal
           isOpen={this.state.isCommentFormOpen}
-          toggle={this.toggleCommentForm}
-        >
+          toggle={this.toggleCommentForm}>
           <ModalHeader toggle={this.toggleCommentForm}>
             Submit Comment
           </ModalHeader>
           <ModalBody>
             <LocalForm
-              onSubmit={(values) => this.handleCommentFormSubmit(values)}
-            >
+              onSubmit={(values) => this.handleCommentFormSubmit(values)}>
               <Row className='form-group'>
                 <Label htmlfor='rating' md={5}>
                   Rating
@@ -75,8 +74,7 @@ class CommentForm extends Component {
                   <Control.select
                     model='.rating'
                     className='form-control'
-                    name='rating'
-                  >
+                    name='rating'>
                     <option>Please Select</option>
                     <option>1</option>
                     <option>2</option>
@@ -148,7 +146,7 @@ function RenderDish({ dish }) {
   if (dish != null)
     return (
       <Card key={dish.id}>
-        <CardImg top src={dish.image} alt={dish.name} />
+        <CardImg top src={baseUrl + '/' + dish.image} alt={dish.name} />
         <CardBody>
           <CardTitle>{dish.name}</CardTitle>
           <CardText>{dish.description}</CardText>
