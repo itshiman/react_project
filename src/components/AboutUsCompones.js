@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,21 +6,24 @@ import {
   CardBody,
   CardHeader,
   Media,
-} from "reactstrap";
-import { Link } from "react-router-dom";
+} from 'reactstrap';
+import { Link } from 'react-router-dom';
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({ leader }) {
   return (
     <Media>
       {console.log(leader.image)}
-      <Media left href="#">
-        <Media object src={leader.image} alt="Leader image" />
+      <Media left href='#'>
+        <Media object src={baseUrl + '/' + leader.image} alt='Leader image' />
       </Media>
       <Media body>
         <Media heading className={`ml-5 font-weight-bold`}>
           {leader.name}
         </Media>
-        <div className="ml-5">
+        <div className='ml-5'>
           <p>{leader.designation}</p>
           <p>{leader.description}</p>
         </div>
@@ -30,26 +33,46 @@ function RenderLeader({ leader }) {
 }
 
 function About(props) {
-  const leaders = props.leaders.map((leader) => {
-    return <RenderLeader leader={leader} />;
-  });
-
+  var leaders;
+  if (props.leaders.isLoading) {
+    leaders = <Loading />;
+  } else if (props.errMess) {
+    leaders = (
+      <div className='container'>
+        <div className='row'>
+          <h4>{props.dishes.errMess}</h4>
+        </div>
+      </div>
+    );
+  } else {
+    leaders = (
+      <Stagger in>
+        {props.leaders.leaders.map((leader) => {
+          return (
+            <Fade in>
+              <RenderLeader leader={leader} />
+            </Fade>
+          );
+        })}
+      </Stagger>
+    );
+  }
   return (
-    <div className="container">
-      <div className="row">
+    <div className='container'>
+      <div className='row'>
         <Breadcrumb>
           <BreadcrumbItem>
-            <Link to="/home">Home</Link>
+            <Link to='/home'>Home</Link>
           </BreadcrumbItem>
           <BreadcrumbItem active>About Us</BreadcrumbItem>
         </Breadcrumb>
-        <div className="col-12">
+        <div className='col-12'>
           <h3>About Us</h3>
           <hr />
         </div>
       </div>
-      <div className="row row-content">
-        <div className="col-12 col-md-6">
+      <div className='row row-content'>
+        <div className='col-12 col-md-6'>
           <h2>Our History</h2>
           <p>
             Started in 2010, Ristorante con Fusion quickly established itself as
@@ -60,42 +83,42 @@ function About(props) {
             will arrive on your plate the next time you visit us.
           </p>
           <p>
-            The restaurant traces its humble beginnings to{" "}
+            The restaurant traces its humble beginnings to{' '}
             <em>The Frying Pan</em>, a successful chain started by our CEO, Mr.
             Peter Pan, that featured for the first time the world's best
             cuisines in a pan.
           </p>
         </div>
-        <div className="col-12 col-md-5">
+        <div className='col-12 col-md-5'>
           <Card>
-            <CardHeader className="bg-primary text-white">
+            <CardHeader className='bg-primary text-white'>
               Facts At a Glance
             </CardHeader>
             <CardBody>
-              <dl className="row p-1">
-                <dt className="col-6">Started</dt>
-                <dd className="col-6">3 Feb. 2013</dd>
-                <dt className="col-6">Major Stake Holder</dt>
-                <dd className="col-6">HK Fine Foods Inc.</dd>
-                <dt className="col-6">Last Year's Turnover</dt>
-                <dd className="col-6">$1,250,375</dd>
-                <dt className="col-6">Employees</dt>
-                <dd className="col-6">40</dd>
+              <dl className='row p-1'>
+                <dt className='col-6'>Started</dt>
+                <dd className='col-6'>3 Feb. 2013</dd>
+                <dt className='col-6'>Major Stake Holder</dt>
+                <dd className='col-6'>HK Fine Foods Inc.</dd>
+                <dt className='col-6'>Last Year's Turnover</dt>
+                <dd className='col-6'>$1,250,375</dd>
+                <dt className='col-6'>Employees</dt>
+                <dd className='col-6'>40</dd>
               </dl>
             </CardBody>
           </Card>
         </div>
-        <div className="col-12">
+        <div className='col-12'>
           <Card>
-            <CardBody className="bg-faded">
-              <blockquote className="blockquote">
-                <p className="mb-0">
+            <CardBody className='bg-faded'>
+              <blockquote className='blockquote'>
+                <p className='mb-0'>
                   You better cut the pizza in four pieces because I'm not hungry
                   enough to eat six.
                 </p>
-                <footer className="blockquote-footer">
+                <footer className='blockquote-footer'>
                   Yogi Berra,
-                  <cite title="Source Title">
+                  <cite title='Source Title'>
                     The Wit and Wisdom of Yogi Berra, P. Pepe, Diversion Books,
                     2014
                   </cite>
@@ -105,11 +128,11 @@ function About(props) {
           </Card>
         </div>
       </div>
-      <div className="row row-content">
-        <div className="col-12">
+      <div className='row row-content'>
+        <div className='col-12'>
           <h2>Corporate Leadership</h2>
         </div>
-        <div className="col-12">
+        <div className='col-12'>
           <Media list>{leaders}</Media>
         </div>
       </div>

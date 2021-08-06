@@ -10,10 +10,11 @@ import {
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { Fade, Stagger } from 'react-animation-components';
 
 function RenderMenuItem({ dish, onClick }) {
   return (
-    <Card>
+    <Card key={dish.id}>
       <Link to={`/menu/${dish.id}`}>
         <CardImg
           width='100%'
@@ -31,7 +32,7 @@ function RenderMenuItem({ dish, onClick }) {
 const Menu = (props) => {
   const menu = props.dishes.dishes.map((dish) => {
     return (
-      <div key={dish.id} className='col-12 col-md-5 m-1'>
+      <div className='col-12 col-md-5 m-1'>
         <RenderMenuItem dish={dish} />
       </div>
     );
