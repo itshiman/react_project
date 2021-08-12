@@ -15,7 +15,7 @@ json-server --watch db.json --port 3001
 
 ```
 
-For more details on json-server visit:[https://www.npmjs.com/package/json-server]
+For more details on json-server visit:https://www.npmjs.com/package/json-server
 
 Open a new terminal window.
 
