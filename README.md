@@ -1,11 +1,14 @@
 # Getting Started
+json-server node modules is used to serve the documnets.
 
-json-server node modules is used to serve the documnets. Install json-server by typing:
+Install json-server by typing:
 ```
 npm install -g json-server
 
 ```
-Switch to the folder where you want to store the database and run the following command:
+Move the json-server folder from project folder into a suitable location.
+
+Switch to the folder and run the following command:
 
 ```
 json-server --watch db.json --port 3001
@@ -13,6 +16,8 @@ json-server --watch db.json --port 3001
 ```
 
 For more details on json-server visit:[https://www.npmjs.com/package/json-server]
+
+Open a new terminal window.
 
 Go to the folder in which you have cloned the repository and run the following commands:
 ```
